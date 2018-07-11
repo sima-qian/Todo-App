@@ -31,8 +31,11 @@ var todoFunctions = {
   },
   deleteTodo: function(todos, idToDelete) {
     // should leave the input argument todos unchanged (you can use cloneArrayOfObjects)
+    var newArr = todos.filter(element =>
+      element.id !== idToDelete);
     // return a new array, this should not contain any todo with an id of idToDelete
     // hint: array.filter
+    return newArr;
   },
   markTodo: function(todos, idToMark) {
     // should leave the input argument todos unchanged (you can use cloneArrayOfObjects)
