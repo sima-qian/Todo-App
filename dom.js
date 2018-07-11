@@ -13,6 +13,7 @@
   ]; // this is our initial todoList
 
   // This function takes a todo, it returns the DOM node representing that todo
+  // todo parameter is one object within state.
   var createTodoNode = function(todo) {
     var todoNode = document.createElement('li');
     // you will need to use addEventListener
@@ -40,7 +41,7 @@
       // https://developer.mozilla.org/en-US/docs/Web/Events/submit
       // what does event.preventDefault do?
       // what is inside event.target?
-
+      
       var description = '?'; // event.target ....
 
       // hint: todoFunctions.addTodo
