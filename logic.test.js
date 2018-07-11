@@ -1,10 +1,64 @@
-var test = require('tape');
-var logic = require('./logic.js');
+var test = require("tape");
+var logic = require("./logic.js");
 
 // Tests for addTodo
+test("addTodo: testing 'smash avocados' returns proper object", function(t) {
+  var actual = logic.addTodo([], "smash avocados");
+  var expected = [{ id: 1, description: "smash avocados", done: false }];
+  t.deepEqual(
+    actual,
+    expected,
+    "testing 'smash avocados' returns proper object"
+  );
+  t.end();
+});
 
+test("addTodo: testing 'eat all the jaffa cakes' returns proper object", function(t) {
+  var actual = logic.addTodo([], "eat all the jaffa cakes");
+  var expected = [
+    { id: 2, description: "eat all the jaffa cakes", done: false }
+  ];
+  t.deepEqual(
+    actual,
+    expected,
+    "testing 'eat all the jaffa cakes' returns proper object"
+  );
+  t.end();
+});
 
+test("addTodo: add second entry to existing array of objects", function(t) {
+  var actual = logic.addTodo(
+    [{ id: 0, description: "start diet", done: false }],
+    "eat all the jaffa cakes"
+  );
+  var expected = [
+    { id: 0, description: "start diet", done: false },
+    { id: 3, description: "eat all the jaffa cakes", done: false }
+  ];
+  t.deepEqual(
+    actual,
+    expected,
+    "add 'eat all the jaffa cakes' to 'start diet' todo list"
+  );
+  t.end();
+});
 
+test("addTodo: test object is being cloned/is pure", function(t) {
+  var actual = logic.addTodo(
+    [{ id: 0, description: "start diet", done: false }],
+    "eat all the jaffa cakes"
+  );
+  var expected = [
+    { id: 0, description: "start diet", done: false },
+    { id: 4, description: "eat all the jaffa cakes", done: false }
+  ];
+  t.deepEqual(
+    actual,
+    expected,
+    "add 'eat all the jaffa cakes' to 'start diet' todo list"
+  );
+  t.end();
+});
 // Tests for deleteTodo
 var state = [
     { id: -3, description: 'first todo', },
@@ -29,8 +83,4 @@ test('Tests for markTodo', function(t) {
     t.deepEqual(logic.markTodo([{id: -1, done: false}, {id: -2, done: false}, {id: -3, done: true}],-1),[{id: -1, done: true}, {id: -2, done: false}, {id: -3, done: true}],"Should only alter item with id of -1, toggling 'done'");
     t.end();
 })
-
 // ( Tests for sortTodos - to be completed later as strech goal)
-
-
-
