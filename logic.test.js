@@ -7,7 +7,7 @@ var logic = require('./logic.js');
 
 // Tests for deleteTodo
 var state = [
-    { id: -3, description: 'first todo' },
+    { id: -3, description: 'first todo', },
     { id: -2, description: 'second todo' },
     { id: -1, description: 'third todo' },
   ];
@@ -20,11 +20,15 @@ test('Tests for deleteTodo', function(t){
     t.end();
 })
 
-
-
 // Tests for markTodo
 
-
+test('Tests for markTodo', function(t) {
+    t.deepEqual(logic.markTodo(state, -4) instanceof Array, true, "Should return array");
+    t.notStrictEqual(logic.markTodo(state, -4), state, "Shouldn't return same array as passed in as argument");
+    t.deepEqual(logic.markTodo([{id: -1, done: false}],-1),[{id: -1, done: true}],"Should alter item with id of -1, toggling 'done'");
+    t.deepEqual(logic.markTodo([{id: -1, done: false}, {id: -2, done: false}, {id: -3, done: true}],-1),[{id: -1, done: true}, {id: -2, done: false}, {id: -3, done: true}],"Should only alter item with id of -1, toggling 'done'");
+    t.end();
+})
 
 // ( Tests for sortTodos - to be completed later as strech goal)
 
