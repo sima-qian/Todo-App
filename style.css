@@ -65,7 +65,7 @@ button {
     width: 24px;
     height: 24px;
     background: #ecf0f1;
-    /* margin-right: auto; */
+    margin: 0 0.875rem;
 }
 
 .del-btn {
