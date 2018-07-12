@@ -70,6 +70,9 @@ var todoFunctions = {
     });
     return undone.concat(done);
   }
+  // editTodo: function(todos, newTodo) {
+  //
+  // }
 };
 
 // Why is this if statement necessary?
