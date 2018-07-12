@@ -38,6 +38,7 @@ li {
     border-radius: 2px;
     align-items: center;
     padding: 1rem;
+    justify-content: space-between;
 }
 
 span {
@@ -47,6 +48,7 @@ span {
     padding: 5px 0;
     margin: 0 1rem;
     text-align: left;
+    flex-grow: 1;
 }
 
 /* ------- button styling ----------- */
@@ -56,13 +58,14 @@ button {
     border: none;
     padding: 0.5rem;
     border-radius: 2px;
+    outline: none;
 }
 
 .mark-btn {
     width: 24px;
     height: 24px;
     background: #ecf0f1;
-    margin-right: auto;
+    /* margin-right: auto; */
 }
 
 .del-btn {
@@ -71,6 +74,7 @@ button {
     background-size: cover;
     background-color: #45bcb1;
     width: 48px;
+    min-width: 48px;
     height: 48px;
     border-radius: 100%;
 }
@@ -78,6 +82,12 @@ button {
 .delete {
     background: #dd6281 !important;
     color: white;
+}
+
+.delete .del-btn {
+    background-image: none;
+    color: white;
+    border: 2px solid white;
 }
 
 .marked .mark-btn {
@@ -105,6 +115,7 @@ input[name="description"] {
     padding: 1rem;
     font-size: 1rem;
     border-radius: 2px;
+    font-family: Karla, sans-serif;
 }
 
 input[type="submit"] {
@@ -114,4 +125,5 @@ input[type="submit"] {
     padding: 1rem;
     font-size: 1.2rem;
     border: none;
+    font-family: Karla, sans-serif;
 }
