@@ -65,7 +65,7 @@ button {
     width: 24px;
     height: 24px;
     background: #ecf0f1;
-    /* margin-right: auto; */
+    margin: 0 0.875rem;
 }
 
 .del-btn {
@@ -115,7 +115,14 @@ input[name="description"] {
     padding: 1rem;
     font-size: 1rem;
     border-radius: 2px;
+    border: none;
     font-family: Karla, sans-serif;
+    color: #525b76;
+}
+
+input[name="description"]:focus {
+    outline-color: lightskyblue;
+
 }
 
 input[type="submit"] {
@@ -126,4 +133,37 @@ input[type="submit"] {
     font-size: 1.2rem;
     border: none;
     font-family: Karla, sans-serif;
+    border-radius: 2px;
+}
+
+/* Media queries for larger screens */
+
+@media (min-width: 850px) {
+
+    body {
+        overflow: hidden;
+    }
+
+    #todo-container {
+        max-width: 37.5rem;
+        margin-top: 6rem;
+        height: 538px;
+        overflow-y: scroll;
+        margin-bottom: 0;
+    }
+
+    #add-todo {
+        max-width: 37.5rem;
+        left: calc( (100vw - 37.5rem) / 2);
+        bottom: 3rem;
+    }
+
+    h1 {
+        text-align: left;
+        padding: 3rem 3.2rem;
+        position: fixed;
+        margin: 0;
+        font-size: 3rem;
+        top: 0;
+    }
 }
