@@ -5,6 +5,7 @@
   // This is the dom node where we will keep our todo
   var container = document.getElementById("todo-container");
   var addTodoForm = document.getElementById("add-todo");
+  var editTodoItem = document.getElementById("edit");
 
   var state = [
     { id: -3, description: "first todo", done: false },
@@ -34,6 +35,25 @@
     // add span holding description
     var todoSpanNode = document.createElement("span");
     todoSpanNode.textContent = todo.description;
+    todoSpanNode.addEventListener("click", function(event) {
+      var todoText = todoSpanNode.textContent;
+      var editInputContainer = document.createElement("form");
+      editInputContainer.setAttribute("id", "edit");
+      var editInput = document.createElement("input");
+      editInput.value = todoText;
+      editInput.setAttribute("type", "text");
+      editInput.setAttribute("autocomplete", "off");
+      editInput.required = true;
+      editInputContainer.appendChild(editInput);
+      todoNode.replaceChild(editInputContainer, todoSpanNode);
+      editInputContainer.addEventListener("submit", function(event) {
+        event.preventDefault();
+        todoText = event.target[0].value;
+        var newState = todoFunctions.editTodo(state, todoText, todo.id);
+        todoSpanNode.textContent = todoText;
+        todoNode.replaceChild(todoSpanNode, editInputContainer);
+      });
+    });
     todoNode.appendChild(todoSpanNode);
 
     // this adds the delete button
@@ -74,9 +94,8 @@
     });
   }
 
-  // you should not need to change this function
   var update = function(newState) {
-    state = newState;
+    state = todoFunctions.sortTodos(newState); // sorts todos before rendering
     renderState(state);
   };
 
