@@ -16,6 +16,10 @@
   // todo parameter is one object within state.
   var createTodoNode = function(todo) {
     var todoNode = document.createElement("li");
+    // add class if marked
+    if (todo.done) {
+      todoNode.classList.add("marked");
+    }
     // you will need to use addEventListener
 
     // add span holding description
@@ -44,7 +48,6 @@
     markButtonNode.textContent = "mark";
     markButtonNode.addEventListener("click", function(event) {
       var newState = todoFunctions.markTodo(state, todo.id);
-      console.log(state);
       update(newState);
     });
     todoNode.appendChild(markButtonNode);
