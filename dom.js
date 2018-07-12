@@ -26,8 +26,16 @@
     var deleteButtonNode = document.createElement("button");
     deleteButtonNode.textContent = "delete";
     deleteButtonNode.addEventListener("click", function(event) {
-      var newState = todoFunctions.deleteTodo(state, todo.id);
-      update(newState);
+      // on click - change event listener, change copy
+      var parentClassList = deleteButtonNode.parentNode.classList;
+      if (parentClassList.contains("delete")) {
+        var newState = todoFunctions.deleteTodo(state, todo.id);
+        update(newState);
+      } else {
+        // todo: style button as needed
+        deleteButtonNode.textContent = "sure?";
+        deleteButtonNode.parentNode.classList.add("delete");
+      }
     });
     todoNode.appendChild(deleteButtonNode);
 
