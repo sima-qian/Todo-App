@@ -127,3 +127,35 @@ input[type="submit"] {
     border: none;
     font-family: Karla, sans-serif;
 }
+
+/* Media queries for larger screens */
+
+@media (min-width: 850px) {
+
+    body {
+        overflow: hidden;
+    }
+
+    #todo-container {
+        max-width: 37.5rem;
+        margin-top: 6rem;
+        height: 538px;
+        overflow-y: scroll;
+        margin-bottom: 0;
+    }
+
+    #add-todo {
+        max-width: 37.5rem;
+        left: calc( (100vw - 37.5rem) / 2);
+        bottom: 3rem;
+    }
+
+    h1 {
+        text-align: left;
+        padding: 3rem 3.2rem;
+        position: fixed;
+        margin: 0;
+        font-size: 3rem;
+        top: 0;
+    }
+}
