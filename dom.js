@@ -62,6 +62,7 @@
       // https://developer.mozilla.org/en-US/docs/Web/Events/submit
       event.preventDefault();
       var description = event.target[0].value; // event.target ....
+      event.target[0].value = ""; // wipe the form value
       // console.log(description);
       var newState = todoFunctions.addTodo(state, description); // ?? change this!
       update(newState);
