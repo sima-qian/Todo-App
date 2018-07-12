@@ -38,10 +38,8 @@
 
         // this adds the delete button
         // define content variables
-        var deleteContent = "delete";
         var sureContent = "sure?";
         var deleteButtonNode = document.createElement("button");
-        deleteButtonNode.textContent = deleteContent;
         deleteButtonNode.classList.add("del-btn");
         deleteButtonNode.addEventListener("click", function(event) {
             // on click - change event listener, change copy
