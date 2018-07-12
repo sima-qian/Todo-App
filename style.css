@@ -6,9 +6,9 @@ body {
     background: linear-gradient(60deg, lightyellow, skyblue);
     min-height: 100vh;
     height: 100%;
-    font-family: 'Karla', sans-serif;
+    font-family: "Karla", sans-serif;
     font-weight: 400;
-    color: #525B76;
+    color: #525b76;
 }
 
 h1 {
@@ -30,26 +30,64 @@ ul {
 }
 
 li {
+    display: flex;
     width: 100%;
     background: white;
-    display: flex;
-    padding: 1rem;
     margin-top: 10px;
     border: none;
+    border-radius: 2px;
+    align-items: center;
+    padding: 1rem;
 }
 
 span {
     display: block;
-    overflow: hidden;
+    width: 90%;
+    word-wrap: break-word;
+    padding: 5px 0;
+    margin: 0 1rem;
+    text-align: left;
 }
+
+/* ------- button styling ----------- */
 
 button {
     display: block;
-    background: lightpink;
-    margin-left: auto;
     border: none;
     padding: 0.5rem;
     border-radius: 2px;
+}
+
+.mark-btn {
+    width: 24px;
+    height: 24px;
+    background: #ecf0f1;
+    margin-right: auto;
+}
+
+.del-btn {
+    /* margin-left: auto; */
+    background-image: url(img/cross.svg);
+    background-size: cover;
+    background-color: #45bcb1;
+    width: 48px;
+    height: 48px;
+    border-radius: 100%;
+}
+
+.delete {
+    background: #dd6281 !important;
+    color: white;
+}
+
+.marked .mark-btn {
+    background: #45bcb1;
+}
+.marked span {
+    text-decoration: line-through;
+}
+.marked {
+    background: #ecf0f1;
 }
 
 /* --------- Add new todo styles --------- */
@@ -65,11 +103,13 @@ button {
 input[name="description"] {
     width: 100%;
     padding: 1rem;
+    font-size: 1rem;
+    border-radius: 2px;
 }
 
 input[type="submit"] {
     width: 100%;
-    background: #525B76;
+    background: #525b76;
     color: white;
     padding: 1rem;
     font-size: 1.2rem;
