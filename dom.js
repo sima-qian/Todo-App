@@ -25,7 +25,6 @@
 
     // add markTodo button
     var markButtonNode = document.createElement("button");
-    markButtonNode.textContent = "mark";
     markButtonNode.classList.add("mark-btn");
     markButtonNode.addEventListener("click", function(event) {
       var newState = todoFunctions.markTodo(state, todo.id);
@@ -58,8 +57,9 @@
     todoNode.appendChild(todoSpanNode);
 
     // this adds the delete button
+    // define content variables
+    var sureContent = "sure?";
     var deleteButtonNode = document.createElement("button");
-    deleteButtonNode.textContent = "delete";
     deleteButtonNode.classList.add("del-btn");
     deleteButtonNode.addEventListener("click", function(event) {
       // on click - change event listener, change copy
@@ -69,8 +69,11 @@
         update(newState);
       } else {
         // todo: style button as needed
-        deleteButtonNode.textContent = "sure?";
+        deleteButtonNode.textContent = sureContent;
         deleteButtonNode.parentNode.classList.add("delete");
+        window.setTimeout(function() {
+          deleteButtonNode.parentNode.classList.remove("delete");
+        }, 4000);
       }
     });
     todoNode.appendChild(deleteButtonNode);
