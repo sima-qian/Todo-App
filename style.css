@@ -33,20 +33,19 @@ li {
   display: flex;
   width: 100%;
   background: white;
-  margin-top: 10px;
+  margin-top: 8px;
   border: none;
   border-radius: 2px;
   align-items: center;
-  padding: 1rem;
+  padding: 0rem;
   justify-content: space-between;
 }
 
 span {
   display: block;
-  width: 90%;
+  width: calc(90vw - 80px);
   word-break: break-word;
   padding: 5px 0;
-  margin: 0 1rem;
   text-align: left;
   flex-grow: 1;
 }
@@ -56,25 +55,28 @@ span {
 button {
   display: block;
   border: none;
-  padding: 0.5rem;
   border-radius: 2px;
   outline: none;
+  padding: 0;
 }
 
 .mark-btn {
   width: 24px;
   height: 24px;
   background: #ecf0f1;
+  margin: 8px;
 }
 
 .del-btn {
   background-image: url(img/cross.svg);
   background-size: cover;
-  background-color: #f890aa;
-  width: 48px;
-  min-width: 48px;
-  height: 48px;
-  border-radius: 100%;
+  background-color: transparent;
+  width: 24px;
+  height: 34.1px;
+  margin-top: calc((40px - 34.1px) / 2);
+  margin-bottom: calc((40px - 34.1px) / 2);
+  margin-left: 8px;
+  margin-right: 8px;
 }
 
 .delete {
@@ -86,15 +88,17 @@ button {
   background-image: #45bcb1;
   background-image: none;
   color: white;
-  border: 2px solid white;
 }
 
 .marked .mark-btn {
-  background: #45bcb1;
+  background: hsla(174, 47%, 50%, 0.6);
 }
+
 .marked span {
   text-decoration: line-through;
+  color: hsla(174, 47%, 50%, 0.45);
 }
+
 .marked {
   background: #ecf0f1;
 }
@@ -113,6 +117,7 @@ input[name="description"] {
   width: 100%;
   padding: 1rem;
   font-size: 1rem;
+  border: none;
   border-radius: 2px;
   font-family: Karla, sans-serif;
 }
@@ -124,8 +129,8 @@ input[type="submit"] {
   padding: 1rem;
   font-size: 1.2rem;
   border: none;
-  font-family: Karla, sans-serif;
   border-radius: 2px;
+  font-family: Karla, sans-serif;
 }
 
 #edit {
@@ -140,8 +145,7 @@ input[type="submit"] {
 }
 
 li form {
-  margin: 0 1rem;
-  width: 90%;
+  width: calc(90vw - 80px);
 }
 
 /* Media queries for larger screens */
@@ -152,25 +156,31 @@ li form {
   }
 
   #todo-container {
-    max-width: 37.5rem;
-    margin-top: 6rem;
+    max-width: 32rem;
     height: 538px;
     overflow-y: scroll;
     margin-bottom: 0;
   }
 
   #add-todo {
-    max-width: 37.5rem;
-    left: calc((100vw - 37.5rem) / 2);
+    max-width: 32rem;
+    left: calc((100vw - 32rem) / 2);
     bottom: 3rem;
   }
 
   h1 {
-    text-align: left;
-    padding: 3rem 3.2rem;
+    min-width: calc((100vw - 32rem) / 2);
+    min-height: calc((100vw - 32rem) / 4);
+    line-height: calc((100vw - 32rem) / 4);
+    text-align: center;
+    padding: 8px;
     position: fixed;
     margin: 0;
     font-size: 3rem;
     top: 0;
+  }
+
+  span {
+    max-width: calc(32rem - 80px);
   }
 }
