@@ -16,6 +16,10 @@
   // todo parameter is one object within state.
   var createTodoNode = function(todo) {
     var todoNode = document.createElement("li");
+    // add class if marked
+    if (todo.done) {
+      todoNode.classList.add("marked");
+    }
     // you will need to use addEventListener
 
     // add span holding description
@@ -26,8 +30,16 @@
     var deleteButtonNode = document.createElement("button");
     deleteButtonNode.textContent = "delete";
     deleteButtonNode.addEventListener("click", function(event) {
-      var newState = todoFunctions.deleteTodo(state, todo.id);
-      update(newState);
+      // on click - change event listener, change copy
+      var parentClassList = deleteButtonNode.parentNode.classList;
+      if (parentClassList.contains("delete")) {
+        var newState = todoFunctions.deleteTodo(state, todo.id);
+        update(newState);
+      } else {
+        // todo: style button as needed
+        deleteButtonNode.textContent = "sure?";
+        deleteButtonNode.parentNode.classList.add("delete");
+      }
     });
     todoNode.appendChild(deleteButtonNode);
 
@@ -36,7 +48,6 @@
     markButtonNode.textContent = "mark";
     markButtonNode.addEventListener("click", function(event) {
       var newState = todoFunctions.markTodo(state, todo.id);
-      console.log(state);
       update(newState);
     });
     todoNode.appendChild(markButtonNode);
@@ -51,6 +62,7 @@
       // https://developer.mozilla.org/en-US/docs/Web/Events/submit
       event.preventDefault();
       var description = event.target[0].value; // event.target ....
+      event.target[0].value = ""; // wipe the form value
       // console.log(description);
       var newState = todoFunctions.addTodo(state, description); // ?? change this!
       update(newState);
