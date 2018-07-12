@@ -16,16 +16,27 @@
   // todo parameter is one object within state.
   var createTodoNode = function(todo) {
     var todoNode = document.createElement("li");
+
     // add class if marked
     if (todo.done) {
       todoNode.classList.add("marked");
     }
-    // you will need to use addEventListener
+
+    // add markTodo button
+    var markButtonNode = document.createElement("button");
+    markButtonNode.textContent = "mark";
+    markButtonNode.classList.add("mark-btn");
+    markButtonNode.addEventListener("click", function(event) {
+      var newState = todoFunctions.markTodo(state, todo.id);
+      update(newState);
+    });
+    todoNode.appendChild(markButtonNode);
 
     // add span holding description
     var todoSpanNode = document.createElement("span");
     todoSpanNode.textContent = todo.description;
     todoNode.appendChild(todoSpanNode);
+
     // this adds the delete button
     var deleteButtonNode = document.createElement("button");
     deleteButtonNode.textContent = "delete";
@@ -43,17 +54,6 @@
       }
     });
     todoNode.appendChild(deleteButtonNode);
-
-    // add markTodo button
-    var markButtonNode = document.createElement("button");
-    markButtonNode.textContent = "mark";
-    markButtonNode.classList.add("mark-btn");
-    markButtonNode.addEventListener("click", function(event) {
-      var newState = todoFunctions.markTodo(state, todo.id);
-      update(newState);
-    });
-    todoNode.appendChild(markButtonNode);
-    // add classes for css
 
     return todoNode;
   };
