@@ -50,10 +50,10 @@
       editInputContainer.addEventListener("submit", function(event) {
         event.preventDefault();
         todoText = event.target[0].value;
+        var newState = todoFunctions.editTodo(state, todoText, todo.id);
         todoSpanNode.textContent = todoText;
         todoNode.replaceChild(todoSpanNode, editInputContainer);
       });
-      //var description = event.target[0].value;
     });
     todoNode.appendChild(todoSpanNode);
 

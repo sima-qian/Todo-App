@@ -69,10 +69,16 @@ var todoFunctions = {
       return !x.done;
     });
     return undone.concat(done);
+  },
+
+  editTodo: function(todos, newTodoText, idToEdit) {
+    return todos.map(function(item) {
+      if (item.id === idToEdit) {
+        item.description = newTodoText;
+      }
+      return item;
+    });
   }
-  // editTodo: function(todos, newTodo) {
-  //
-  // }
 };
 
 // Why is this if statement necessary?
