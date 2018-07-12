@@ -32,14 +32,14 @@ Please, we live for a good process.
 ### Day 1
 
 - We began by brainstorming our ideas and spending a large chunk of time reading through the pre-existing code we inherited as we began our journey to comprehension.
-- We then split into two pairs and began coding up our JavaScript logic file - this included things like adding, delete and sorting functions. We started with a TDD approach but, if we're being completely honest, kind of lost our focus on testing as we advanced through the end of the day and into day 2.
+- We then split into two pairs and began coding up our JavaScript logic file - this included things like adding, delete and marking functions. We started with a TDD approach but, if we're being completely honest, kind of lost our focus on testing as we advanced through the end of the day and into day 2.
 - By the end of Day 1 we had our logic pretty much complete and ready to roll. Our code was probably not the most beautiful in the world but we felt like proud parents _because it was all ours_.
 
 ### Day 2
 
 - On day two we split into two groups - one took over styling and aesthetics and our other pair got stuck into all the Javascript.
 - Our aesthetic pair got absolutely stuck into the CSS, paying special attention to our spacing elements (our design challenge for the week) and creating a mobile-first design and intuitive visual elements.
-- Our unaesthetic pair had a blast squashing some bugs, refactoring code and incorporating some stretch goals - such as adding a 'are you sure?' message before deleting (design heuristics alllllllll up in here) and the ability to edit entries.
+- Our unaesthetic pair had a blast squashing some bugs, refactoring code and incorporating some stretch goals - such as adding an 'are you sure?' message before deleting (design heuristics alllllllll up in here) and the ability to edit entries.
 
 On reflection we perhaps siloed ourselves a bit much on Day 2 - both groups were totally into their respective tasks, and it might have been better to swap up our programming pairs a little more. But we were in frequent communication with one another so we never felt like we were losing sight of the overall code base.
 
