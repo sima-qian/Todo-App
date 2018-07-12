@@ -115,7 +115,14 @@ input[name="description"] {
     padding: 1rem;
     font-size: 1rem;
     border-radius: 2px;
+    border: none;
     font-family: Karla, sans-serif;
+    color: #525b76;
+}
+
+input[name="description"]:focus {
+    outline-color: lightskyblue;
+
 }
 
 input[type="submit"] {
@@ -126,6 +133,7 @@ input[type="submit"] {
     font-size: 1.2rem;
     border: none;
     font-family: Karla, sans-serif;
+    border-radius: 2px;
 }
 
 /* Media queries for larger screens */
