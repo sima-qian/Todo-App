@@ -71,9 +71,8 @@
     });
   }
 
-  // you should not need to change this function
   var update = function(newState) {
-    state = newState;
+    state = todoFunctions.sortTodos(newState); // sorts todos before rendering
     renderState(state);
   };
 
