@@ -37,7 +37,11 @@
         todoNode.appendChild(todoSpanNode);
 
         // this adds the delete button
+        // define content variables
+        var deleteContent = "delete";
+        var sureContent = "sure?";
         var deleteButtonNode = document.createElement("button");
+        deleteButtonNode.textContent = deleteContent;
         deleteButtonNode.classList.add("del-btn");
         deleteButtonNode.addEventListener("click", function(event) {
             // on click - change event listener, change copy
@@ -47,8 +51,12 @@
                 update(newState);
             } else {
                 // todo: style button as needed
-                deleteButtonNode.textContent = "sure?";
+                deleteButtonNode.textContent = sureContent;
                 deleteButtonNode.parentNode.classList.add("delete");
+                window.setTimeout(function() {
+                    deleteButtonNode.textContent = deleteContent;
+                    deleteButtonNode.parentNode.classList.remove("delete");
+                }, 4000);
             }
         });
         todoNode.appendChild(deleteButtonNode);
