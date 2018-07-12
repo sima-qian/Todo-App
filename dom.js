@@ -112,6 +112,7 @@
       // console.log(description);
       var newState = todoFunctions.addTodo(state, description); // ?? change this!
       update(newState);
+      window.scrollTo(0, 0);
     });
   }
 
