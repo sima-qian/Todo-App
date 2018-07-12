@@ -80,14 +80,11 @@ button {
 }
 
 .delete {
-  background: #dd6281 !important;
-  color: white;
+  background: hsla(0, 47%, 75%, 1) !important;
 }
 
 .delete .del-btn {
-  background-image: #45bcb1;
-  background-image: none;
-  color: white;
+  // add styling here
 }
 
 .marked .mark-btn {
