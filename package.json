@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Team IJKL back once again with the todo list project",
   "main": "dom.js",
-  "dependencies": {},
+  "dependencies": {
+    "normalize.css": "^8.0.0"
+  },
   "devDependencies": {
     "istanbul": "^0.4.5",
     "nodemon": "^1.18.0",
