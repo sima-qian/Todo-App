@@ -29,6 +29,7 @@
     // this adds the delete button
     var deleteButtonNode = document.createElement("button");
     deleteButtonNode.textContent = "delete";
+    deleteButtonNode.classList.add("del-btn");
     deleteButtonNode.addEventListener("click", function(event) {
       // on click - change event listener, change copy
       var parentClassList = deleteButtonNode.parentNode.classList;
@@ -46,6 +47,7 @@
     // add markTodo button
     var markButtonNode = document.createElement("button");
     markButtonNode.textContent = "mark";
+    markButtonNode.classList.add("mark-btn");
     markButtonNode.addEventListener("click", function(event) {
       var newState = todoFunctions.markTodo(state, todo.id);
       update(newState);
