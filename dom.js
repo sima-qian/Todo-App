@@ -1,11 +1,9 @@
-// part 2 linking it all together
-// The function here is called an iife,
-// it keeps everything inside hidden from the rest of our application
 (function() {
-  // This is the dom node where we will keep our todo
+  // DOM node containing todo
   var container = document.getElementById("todo-container");
+
   var addTodoForm = document.getElementById("add-todo");
-  var editTodoItem = document.getElementById("edit");
+  var editTodoItem = document.getElementById("edit"); // needed?
 
   var state = [
     { id: -3, description: "first todo", done: false },
@@ -14,46 +12,70 @@
   ]; // this is our initial todoList
 
   // This function takes a todo, it returns the DOM node representing that todo
-  // todo parameter is one object within state.
   var createTodoNode = function(todo) {
     var todoNode = document.createElement("li");
+    var editing = false;
 
-    // add class if marked
+    // add marked class if 'done' is true
     if (todo.done) {
       todoNode.classList.add("marked");
     }
 
-    // add markTodo button
+    // add markTodo button element
     var markButtonNode = document.createElement("button");
     markButtonNode.classList.add("mark-btn");
     markButtonNode.addEventListener("click", function(event) {
+      editing = false;
       var newState = todoFunctions.markTodo(state, todo.id);
       update(newState);
     });
     todoNode.appendChild(markButtonNode);
 
-    // add span holding description
+    // add span element holding todo description
     var todoSpanNode = document.createElement("span");
     todoSpanNode.textContent = todo.description;
+
+    // event listener for todo editing
     todoSpanNode.addEventListener("click", function(event) {
+      editing = true;
       var todoText = todoSpanNode.textContent;
       var editInputContainer = document.createElement("form");
-      editInputContainer.setAttribute("id", "edit");
       var editInput = document.createElement("input");
       editInput.value = todoText;
+      editInput.setAttribute("id", "edit");
       editInput.setAttribute("type", "text");
       editInput.setAttribute("autocomplete", "off");
+      editInput.setAttribute("maxlength", "100");
       editInput.required = true;
       editInputContainer.appendChild(editInput);
       todoNode.replaceChild(editInputContainer, todoSpanNode);
       editInputContainer.addEventListener("submit", function(event) {
         event.preventDefault();
+        editing = false;
         todoText = event.target[0].value;
         var newState = todoFunctions.editTodo(state, todoText, todo.id);
         todoSpanNode.textContent = todoText;
         todoNode.replaceChild(todoSpanNode, editInputContainer);
       });
+
+      // deselect edit upon click elsewhere
+      document.addEventListener("click", function(event) {
+        if (
+          editing &&
+          !event.target.isEqualNode(editInput) &&
+          !event.target.isEqualNode(todoSpanNode)
+        ) {
+          todoText = editInput.value;
+          var newState = todoFunctions.editTodo(state, todoText, todo.id);
+          todoSpanNode.textContent = todoText;
+          console.log("editing: ", editing);
+          editing = false;
+          console.log(todoNode.children);
+          todoNode.replaceChild(editInputContainer, todoSpanNode);
+        }
+      });
     });
+
     todoNode.appendChild(todoSpanNode);
 
     // this adds the delete button
@@ -62,13 +84,12 @@
     var deleteButtonNode = document.createElement("button");
     deleteButtonNode.classList.add("del-btn");
     deleteButtonNode.addEventListener("click", function(event) {
-      // on click - change event listener, change copy
+      editing = false;
       var parentClassList = deleteButtonNode.parentNode.classList;
       if (parentClassList.contains("delete")) {
         var newState = todoFunctions.deleteTodo(state, todo.id);
         update(newState);
       } else {
-        // todo: style button as needed
         deleteButtonNode.textContent = sureContent;
         deleteButtonNode.parentNode.classList.add("delete");
         window.setTimeout(function() {
@@ -85,9 +106,8 @@
   // bind create todo form
   if (addTodoForm) {
     addTodoForm.addEventListener("submit", function(event) {
-      // https://developer.mozilla.org/en-US/docs/Web/Events/submit
       event.preventDefault();
-      var description = event.target[0].value; // event.target ....
+      var description = event.target[0].value;
       event.target[0].value = ""; // wipe the form value
       // console.log(description);
       var newState = todoFunctions.addTodo(state, description); // ?? change this!
