@@ -3,6 +3,7 @@
   var container = document.getElementById("todo-container");
 
   var addTodoForm = document.getElementById("add-todo");
+  var editing = false;
 
   var state = [
     { id: -3, description: "first todo", done: false },
@@ -30,16 +31,18 @@
 
     // add span element holding todo description
     var todoSpanNode = document.createElement("span");
+    todoSpanNode.setAttribute("onclick", "event.stopPropagation()");
     todoSpanNode.textContent = todo.description;
 
     // event listener for todo editing
     todoSpanNode.addEventListener("click", function(event) {
+      editing = true;
       var todoText = todoSpanNode.textContent; // save current todo text
 
       // create form element
       var editInputContainer = document.createElement("form");
       editInputContainer.innerHTML =
-        '<input id="edit" type="text" maxlength="100" autocomplete="off" value="' +
+        '<input id="edit" type="text" onclick="event.stopPropagation()" maxlength="100" autocomplete="off" value="' +
         todoText +
         '" required/>'; // fill form element with input element
 
@@ -49,11 +52,22 @@
       // event listener to submitting edited text
       editInputContainer.addEventListener("submit", function(event) {
         // upon pressing enter
+        editing = false;
         event.preventDefault();
         todoText = event.target[0].value;
         var newState = todoFunctions.editTodo(state, todoText, todo.id);
         update(newState);
       });
+
+      function saveEdit() {
+        editing = false;
+        todoText = editInputContainer.firstChild.value;
+        var newState = todoFunctions.editTodo(state, todoText, todo.id);
+        document.removeEventListener("click", saveEdit);
+        update(newState);
+      }
+
+      document.addEventListener("click", saveEdit);
     });
 
     todoNode.appendChild(todoSpanNode);
