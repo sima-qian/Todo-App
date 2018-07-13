@@ -193,7 +193,8 @@ li form {
     top: 0;
   }
 
-  span {
+  span,
+  li form {
     max-width: calc(32rem - 80px);
   }
 }
