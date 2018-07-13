@@ -170,6 +170,10 @@ li form {
     margin-bottom: 0;
   }
 
+  input[name="description"] {
+    max-width: 32rem;
+  }
+
   #add-todo {
     max-width: 32rem;
     margin: 0;
