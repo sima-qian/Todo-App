@@ -4,6 +4,7 @@
 
   var addTodoForm = document.getElementById("add-todo");
   var editTodoItem = document.getElementById("edit"); // needed?
+  var editing = false;
 
   var state = [
     { id: -3, description: "first todo", done: false },
@@ -14,7 +15,6 @@
   // This function takes a todo, it returns the DOM node representing that todo
   var createTodoNode = function(todo) {
     var todoNode = document.createElement("li");
-    var editing = false;
 
     // add marked class if 'done' is true
     if (todo.done) {
@@ -37,42 +37,27 @@
 
     // event listener for todo editing
     todoSpanNode.addEventListener("click", function(event) {
-      editing = true;
-      var todoText = todoSpanNode.textContent;
+      editing = true; // edit in progress
+      var todoText = todoSpanNode.textContent; // save current todo text
+
+      // create form element
       var editInputContainer = document.createElement("form");
-      var editInput = document.createElement("input");
-      editInput.value = todoText;
-      editInput.setAttribute("id", "edit");
-      editInput.setAttribute("type", "text");
-      editInput.setAttribute("autocomplete", "off");
-      editInput.setAttribute("maxlength", "100");
-      editInput.required = true;
-      editInputContainer.appendChild(editInput);
+      editInputContainer.innerHTML =
+        '<input id="edit" type="text" maxlength="100" autocomplete="off" value="' +
+        todoText +
+        '" required/>'; // fill form element with input element
+
+      // replace original span with form
       todoNode.replaceChild(editInputContainer, todoSpanNode);
+
+      // event listener to submitting edited text
       editInputContainer.addEventListener("submit", function(event) {
+        // upon pressing enter
         event.preventDefault();
         editing = false;
         todoText = event.target[0].value;
         var newState = todoFunctions.editTodo(state, todoText, todo.id);
-        todoSpanNode.textContent = todoText;
-        todoNode.replaceChild(todoSpanNode, editInputContainer);
-      });
-
-      // deselect edit upon click elsewhere
-      document.addEventListener("click", function(event) {
-        if (
-          editing &&
-          !event.target.isEqualNode(editInput) &&
-          !event.target.isEqualNode(todoSpanNode)
-        ) {
-          todoText = editInput.value;
-          var newState = todoFunctions.editTodo(state, todoText, todo.id);
-          todoSpanNode.textContent = todoText;
-          console.log("editing: ", editing);
-          editing = false;
-          console.log(todoNode.children);
-          todoNode.replaceChild(editInputContainer, todoSpanNode);
-        }
+        update(newState);
       });
     });
 
@@ -124,6 +109,7 @@
   // you do not need to change this function
   var renderState = function(state) {
     var todoListNode = document.createElement("ul");
+    todoListNode.classList.add("elsewhere");
 
     state.forEach(function(todo) {
       todoListNode.appendChild(createTodoNode(todo));

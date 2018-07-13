@@ -162,13 +162,13 @@ li form {
   #add-todo {
     max-width: 32rem;
     left: calc((100vw - 32rem) / 2);
-    bottom: 3rem;
+    bottom: 8px;
   }
 
   h1 {
     min-width: calc((100vw - 32rem) / 2);
-    min-height: calc((100vw - 32rem) / 4);
-    line-height: calc((100vw - 32rem) / 4);
+    max-height: 100vh;
+    line-height: calc(100vh - 16px);
     text-align: center;
     padding: 8px;
     position: fixed;
