@@ -3,8 +3,6 @@
   var container = document.getElementById("todo-container");
 
   var addTodoForm = document.getElementById("add-todo");
-  var editTodoItem = document.getElementById("edit"); // needed?
-  var editing = false;
 
   var state = [
     { id: -3, description: "first todo", done: false },
@@ -25,7 +23,6 @@
     var markButtonNode = document.createElement("button");
     markButtonNode.classList.add("mark-btn");
     markButtonNode.addEventListener("click", function(event) {
-      editing = false;
       var newState = todoFunctions.markTodo(state, todo.id);
       update(newState);
     });
@@ -37,7 +34,6 @@
 
     // event listener for todo editing
     todoSpanNode.addEventListener("click", function(event) {
-      editing = true; // edit in progress
       var todoText = todoSpanNode.textContent; // save current todo text
 
       // create form element
@@ -54,7 +50,6 @@
       editInputContainer.addEventListener("submit", function(event) {
         // upon pressing enter
         event.preventDefault();
-        editing = false;
         todoText = event.target[0].value;
         var newState = todoFunctions.editTodo(state, todoText, todo.id);
         update(newState);
@@ -65,17 +60,14 @@
 
     // this adds the delete button
     // define content variables
-    var sureContent = "sure?";
     var deleteButtonNode = document.createElement("button");
     deleteButtonNode.classList.add("del-btn");
     deleteButtonNode.addEventListener("click", function(event) {
-      editing = false;
       var parentClassList = deleteButtonNode.parentNode.classList;
       if (parentClassList.contains("delete")) {
         var newState = todoFunctions.deleteTodo(state, todo.id);
         update(newState);
       } else {
-        deleteButtonNode.textContent = sureContent;
         deleteButtonNode.parentNode.classList.add("delete");
         window.setTimeout(function() {
           deleteButtonNode.parentNode.classList.remove("delete");

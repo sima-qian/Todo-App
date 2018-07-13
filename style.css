@@ -84,7 +84,7 @@ button {
 }
 
 .delete {
-  background: hsla(0, 47%, 75%, 1) !important;
+  background: hsla(356, 95%, 75%, 0.3) !important;
 }
 
 .delete .del-btn {
