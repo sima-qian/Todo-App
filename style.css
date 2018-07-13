@@ -14,12 +14,14 @@ body {
 h1 {
   text-align: center;
   font-weight: 700;
+  margin: 16px 0;
+  font-size: 32px;
 }
 
 #todo-container {
-  width: 90%;
-  margin: auto;
-  margin-bottom: 7.5rem;
+  width: calc(100vw - 32px);
+  margin: 0 16px;
+  margin-bottom: calc(115px);
 }
 
 ul {
@@ -45,9 +47,11 @@ span {
   display: block;
   width: calc(90vw - 80px);
   word-break: break-word;
-  padding: 5px 0;
+  padding: 8px 0;
   text-align: left;
+  line-height: 1em;
   flex-grow: 1;
+  font-size: 1rem;
 }
 
 /* ------- button styling ----------- */
@@ -103,28 +107,34 @@ button {
 /* --------- Add new todo styles --------- */
 
 #add-todo {
-  margin-top: 50px;
+  margin: 0 16px;
   position: fixed;
   bottom: 0;
-  width: 90vw;
-  left: 5%;
+  width: calc(100vw - 32px);
 }
 
 input[name="description"] {
-  width: 100%;
-  padding: 1rem;
+  width: calc(100vw - 32px);
+  padding: 16px;
   font-size: 1rem;
+  line-height: 1rem;
   border: none;
   border-radius: 2px;
   font-family: Karla, sans-serif;
+  border-style: solid;
+  border-color: #525b76;
+  border-width: thin;
+  position: fixed;
+  bottom: calc(1rem + 32px);
 }
 
 input[type="submit"] {
   width: 100%;
   background: #525b76;
   color: white;
-  padding: 1rem;
-  font-size: 1.2rem;
+  padding: 16px;
+  font-size: 1rem;
+  line-height: 1rem;
   border: none;
   border-radius: 2px;
   font-family: Karla, sans-serif;
@@ -142,7 +152,7 @@ input[type="submit"] {
 }
 
 li form {
-  width: calc(90vw - 80px);
+  width: calc(100vw - 114px);
 }
 
 /* Media queries for larger screens */
@@ -154,13 +164,15 @@ li form {
 
   #todo-container {
     max-width: 32rem;
-    height: 538px;
+    margin: 0 auto;
+    /* height: 538px; */
     overflow-y: scroll;
     margin-bottom: 0;
   }
 
   #add-todo {
     max-width: 32rem;
+    margin: 0;
     left: calc((100vw - 32rem) / 2);
     bottom: 8px;
   }
