@@ -89,7 +89,7 @@ button {
 }
 
 .delete .del-btn {
-  // add styling here
+  /* funky styling here */
 }
 
 .marked .mark-btn {
@@ -116,24 +116,25 @@ button {
 
 input[name="description"] {
   width: calc(100vw - 32px);
-  padding: 16px;
+  padding: 8px;
   font-size: 1rem;
   line-height: 1rem;
   border-radius: 2px;
   font-family: Karla, sans-serif;
   font-weight: 400;
+  box-sizing: border-box;
   border-style: solid;
   border-color: #525b76;
   border-width: thin;
   position: fixed;
-  bottom: calc(1rem + 32px);
+  bottom: calc(1rem + 16px);
 }
 
 input[type="submit"] {
   width: 100%;
   background: #525b76;
   color: white;
-  padding: 16px;
+  padding: 8px;
   font-size: 1rem;
   line-height: 1rem;
   border: none;
@@ -191,6 +192,7 @@ li form {
 
   input[name="description"] {
     max-width: 32rem;
+    bottom: calc(1rem + 24px);
   }
 
   #add-todo {
