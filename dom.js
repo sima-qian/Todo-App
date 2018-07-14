@@ -65,6 +65,7 @@
         event.preventDefault();
         todoText = event.target[0].value;
         if (!todoText) {
+          // delete todo if text blank
           var newState = todoFunctions.deleteTodo(state, todo.id);
           update(newState);
         }
@@ -76,8 +77,13 @@
         // console.log("saveEdit called");
         editing = false;
         todoText = editInputContainer.firstChild.value;
-        var newState = todoFunctions.editTodo(state, todoText, todo.id);
+        if (!todoText) {
+          // delete todo if text blank
+          var newState = todoFunctions.deleteTodo(state, todo.id);
+          update(newState);
+        }
         document.removeEventListener("click", saveEdit);
+        var newState = todoFunctions.editTodo(state, todoText, todo.id);
         update(newState);
       }
 
