@@ -22,7 +22,7 @@ h1 {
 #todo-container {
   width: calc(100vw - 32px);
   margin: 0 16px 0 16px;
-  margin-bottom: calc(117px);
+  margin-bottom: 117px;
 }
 
 ul {
@@ -185,7 +185,7 @@ li form {
   #todo-container {
     max-width: 32rem;
     margin: 0 auto;
-    /* height: 538px; */
+    max-height: calc(100vh - (8px + 2rem + 16px + 16px + 8px + 8px));
     overflow-y: scroll;
     margin-bottom: 0;
   }
