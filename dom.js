@@ -44,7 +44,7 @@
       editInputContainer.innerHTML =
         '<input id="edit" type="text" onclick="event.stopPropagation()" maxlength="100" autocomplete="off" value="' +
         todoText +
-        '" required/>'; // fill form element with input element
+        '" />'; // fill form element with input element
 
       // replace original span with form
       todoNode.replaceChild(editInputContainer, todoSpanNode);
@@ -64,6 +64,10 @@
         editing = false;
         event.preventDefault();
         todoText = event.target[0].value;
+        if (!todoText) {
+          var newState = todoFunctions.deleteTodo(state, todo.id);
+          update(newState);
+        }
         var newState = todoFunctions.editTodo(state, todoText, todo.id);
         update(newState);
       });
