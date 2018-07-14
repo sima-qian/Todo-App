@@ -20,8 +20,8 @@ h1 {
 
 #todo-container {
   width: calc(100vw - 32px);
-  margin: 0 16px;
-  margin-bottom: calc(115px);
+  margin: 0 16px 0 16px;
+  margin-bottom: calc(117px);
 }
 
 ul {
@@ -118,9 +118,9 @@ input[name="description"] {
   padding: 16px;
   font-size: 1rem;
   line-height: 1rem;
-  border: none;
   border-radius: 2px;
   font-family: Karla, sans-serif;
+  font-weight: 400;
   border-style: solid;
   border-color: #525b76;
   border-width: thin;
@@ -138,6 +138,7 @@ input[type="submit"] {
   border: none;
   border-radius: 2px;
   font-family: Karla, sans-serif;
+  font-weight: 400;
 }
 
 #edit {
@@ -146,6 +147,7 @@ input[type="submit"] {
   font-size: 1rem;
   border-radius: 2px;
   font-family: Karla, sans-serif;
+  font-weight: 400;
   border: 2px solid skyblue;
   box-sizing: border-box;
   text-align: left;
