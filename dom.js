@@ -20,7 +20,7 @@
       todoNode.classList.add("marked");
     }
 
-    // add markTodo button element
+    // add markTodo button & functionality
     var markButtonNode = document.createElement("button");
     markButtonNode.classList.add("mark-btn");
     markButtonNode.addEventListener("click", function(event) {
@@ -49,6 +49,15 @@
       // replace original span with form
       todoNode.replaceChild(editInputContainer, todoSpanNode);
 
+      // automatic focus on input, so user can start typing immediately
+      var input = editInputContainer.firstChild;
+      input.focus();
+
+      // cheeky hack to get cursor at end of text
+      var val = input.value;
+      input.value = "";
+      input.value = val;
+
       // event listener to submitting edited text
       editInputContainer.addEventListener("submit", function(event) {
         // upon pressing enter
@@ -60,6 +69,7 @@
       });
 
       function saveEdit() {
+        console.log("saveEdit called");
         editing = false;
         todoText = editInputContainer.firstChild.value;
         var newState = todoFunctions.editTodo(state, todoText, todo.id);
@@ -70,22 +80,29 @@
       document.addEventListener("click", saveEdit);
     });
 
+    // document
+    //   .getElementById("todo-container")
+    //   .addEventListener("click", function() {
+    //     console.log("bubbling");
+    //   });
+
     todoNode.appendChild(todoSpanNode);
 
-    // this adds the delete button
-    // define content variables
+    // add the deleteTodo button & functionality
     var deleteButtonNode = document.createElement("button");
     deleteButtonNode.classList.add("del-btn");
     deleteButtonNode.addEventListener("click", function(event) {
+      console.log("delete called");
       var parentClassList = deleteButtonNode.parentNode.classList;
       if (parentClassList.contains("delete")) {
         var newState = todoFunctions.deleteTodo(state, todo.id);
         update(newState);
       } else {
         deleteButtonNode.parentNode.classList.add("delete");
+        console.log(deleteButtonNode.parentNode.classList);
         window.setTimeout(function() {
+          console.log("callback called");
           deleteButtonNode.parentNode.classList.remove("delete");
-          deleteButtonNode.textContent = "";
         }, 4000);
       }
     });
@@ -115,7 +132,6 @@
   // you do not need to change this function
   var renderState = function(state) {
     var todoListNode = document.createElement("ul");
-    todoListNode.classList.add("elsewhere");
 
     state.forEach(function(todo) {
       todoListNode.appendChild(createTodoNode(todo));

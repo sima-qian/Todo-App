@@ -141,16 +141,32 @@ input[type="submit"] {
   font-weight: 400;
 }
 
+input:focus,
+input:focus-within {
+  outline-color: #525b76 !important;
+  box-shadow: none;
+}
+
+input[type="submit"]:active {
+  // add funky styling here
+}
+
 #edit {
   width: 100%;
-  padding: 5px;
+  padding: 4px;
   font-size: 1rem;
   border-radius: 2px;
+  border: none;
   font-family: Karla, sans-serif;
   font-weight: 400;
-  border: 2px solid skyblue;
   box-sizing: border-box;
   text-align: left;
+}
+
+#edit:focus {
+  border: none;
+  outline-width: medium;
+  color: #525b76;
 }
 
 li form {
