@@ -69,7 +69,7 @@
       });
 
       function saveEdit() {
-        console.log("saveEdit called");
+        // console.log("saveEdit called");
         editing = false;
         todoText = editInputContainer.firstChild.value;
         var newState = todoFunctions.editTodo(state, todoText, todo.id);
@@ -92,16 +92,16 @@
     var deleteButtonNode = document.createElement("button");
     deleteButtonNode.classList.add("del-btn");
     deleteButtonNode.addEventListener("click", function(event) {
-      console.log("delete called");
+      // console.log("delete called");
       var parentClassList = deleteButtonNode.parentNode.classList;
       if (parentClassList.contains("delete")) {
         var newState = todoFunctions.deleteTodo(state, todo.id);
         update(newState);
       } else {
         deleteButtonNode.parentNode.classList.add("delete");
-        console.log(deleteButtonNode.parentNode.classList);
+        // console.log(deleteButtonNode.parentNode.classList);
         window.setTimeout(function() {
-          console.log("callback called");
+          // console.log("callback called");
           deleteButtonNode.parentNode.classList.remove("delete");
         }, 4000);
       }
