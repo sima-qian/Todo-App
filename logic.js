@@ -52,6 +52,14 @@ var todoFunctions = {
       }
       return item;
     });
+  },
+
+  checkTodoTextBlank: function(todos, newTodoText, id) {
+    if (!newTodoText) {
+      return (newState = todoFunctions.deleteTodo(todos, id));
+    } else {
+      return (newState = todoFunctions.editTodo(todos, newTodoText, id));
+    }
   }
 };
 

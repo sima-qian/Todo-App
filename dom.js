@@ -23,16 +23,17 @@
     // add markTodo button & functionality
     var markButtonNode = document.createElement("button");
     markButtonNode.classList.add("mark-btn");
+    todoNode.appendChild(markButtonNode);
     markButtonNode.addEventListener("click", function(event) {
       var newState = todoFunctions.markTodo(state, todo.id);
       update(newState);
     });
-    todoNode.appendChild(markButtonNode);
 
     // add span element holding todo description
     var todoSpanNode = document.createElement("span");
     todoSpanNode.setAttribute("onclick", "event.stopPropagation()");
     todoSpanNode.textContent = todo.description;
+    todoNode.appendChild(todoSpanNode);
 
     // event listener for todo editing
     todoSpanNode.addEventListener("click", function(event) {
@@ -58,65 +59,56 @@
       input.value = "";
       input.value = val;
 
-      // event listener to submitting edited text
+      // event listener for submitting edited text
       editInputContainer.addEventListener("submit", function(event) {
         // upon pressing enter
-        editing = false;
         event.preventDefault();
-        todoText = event.target[0].value;
-        if (!todoText) {
-          // delete todo if text blank
-          var newState = todoFunctions.deleteTodo(state, todo.id);
-          update(newState);
-        }
-        var newState = todoFunctions.editTodo(state, todoText, todo.id);
-        update(newState);
+        saveEdit();
       });
 
+      // event listener for clicking elsewhere while editing
+      document.addEventListener("click", saveEdit);
+
+      var todoList = document.querySelectorAll("span");
+      todoList.forEach(span =>
+        span.addEventListener("click", function() {
+          saveEdit();
+        })
+      );
+
       function saveEdit() {
-        // console.log("saveEdit called");
         editing = false;
         todoText = editInputContainer.firstChild.value;
-        if (!todoText) {
-          // delete todo if text blank
-          var newState = todoFunctions.deleteTodo(state, todo.id);
-          update(newState);
-        }
+        var newState = todoFunctions.checkTodoTextBlank(
+          state,
+          todoText,
+          todo.id
+        );
+        todoList.forEach(span => span.removeEventListener("click", saveEdit));
         document.removeEventListener("click", saveEdit);
-        var newState = todoFunctions.editTodo(state, todoText, todo.id);
         update(newState);
       }
-
-      document.addEventListener("click", saveEdit);
     });
-
-    // document
-    //   .getElementById("todo-container")
-    //   .addEventListener("click", function() {
-    //     console.log("bubbling");
-    //   });
-
-    todoNode.appendChild(todoSpanNode);
 
     // add the deleteTodo button & functionality
     var deleteButtonNode = document.createElement("button");
     deleteButtonNode.classList.add("del-btn");
+    todoNode.appendChild(deleteButtonNode);
     deleteButtonNode.addEventListener("click", function(event) {
       // console.log("delete called");
-      var parentClassList = deleteButtonNode.parentNode.classList;
-      if (parentClassList.contains("delete")) {
-        var newState = todoFunctions.deleteTodo(state, todo.id);
-        update(newState);
-      } else {
-        deleteButtonNode.parentNode.classList.add("delete");
-        // console.log(deleteButtonNode.parentNode.classList);
-        window.setTimeout(function() {
-          // console.log("callback called");
-          deleteButtonNode.parentNode.classList.remove("delete");
-        }, 4000);
-      }
+      // var parentClassList = deleteButtonNode.parentNode.classList;
+      // if (parentClassList.contains("delete")) {
+      var newState = todoFunctions.deleteTodo(state, todo.id);
+      update(newState);
+      // } else {
+      //   deleteButtonNode.parentNode.classList.add("delete");
+      //   // console.log(deleteButtonNode.parentNode.classList);
+      //   window.setTimeout(function() {
+      //     // console.log("callback called");
+      //     deleteButtonNode.parentNode.classList.remove("delete");
+      //   }, 4000);
+      // }
     });
-    todoNode.appendChild(deleteButtonNode);
 
     return todoNode;
   };
