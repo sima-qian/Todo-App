@@ -6,9 +6,9 @@
   var editing = false;
 
   var state = [
-    { id: -3, description: "first todo", done: false },
-    { id: -2, description: "second todo", done: false },
-    { id: -1, description: "third todo", done: false }
+    { id: -3, description: "first todo", done: false, delete: false },
+    { id: -2, description: "second todo", done: false, delete: false },
+    { id: -1, description: "third todo", done: false, delete: false }
   ]; // this is our initial todoList
 
   // This function takes a todo, it returns the DOM node representing that todo
@@ -31,7 +31,6 @@
 
     // add span element holding todo description
     var todoSpanNode = document.createElement("span");
-    todoSpanNode.setAttribute("onclick", "event.stopPropagation()");
     todoSpanNode.textContent = todo.description;
     todoNode.appendChild(todoSpanNode);
 
@@ -63,16 +62,19 @@
       editInputContainer.addEventListener("submit", function(event) {
         // upon pressing enter
         event.preventDefault();
-        saveEdit();
+        saveEdit(); // not here
       });
 
       // event listener for clicking elsewhere while editing
-      document.addEventListener("click", saveEdit);
+      setTimeout(() => {
+        document.addEventListener("click", saveEdit);
+      }, 100);
+
 
       var todoList = document.querySelectorAll("span");
       todoList.forEach(span =>
         span.addEventListener("click", function() {
-          saveEdit();
+          saveEdit(); // not here
         })
       );
 
@@ -95,19 +97,18 @@
     deleteButtonNode.classList.add("del-btn");
     todoNode.appendChild(deleteButtonNode);
     deleteButtonNode.addEventListener("click", function(event) {
-      // console.log("delete called");
-      // var parentClassList = deleteButtonNode.parentNode.classList;
-      // if (parentClassList.contains("delete")) {
+      var parentClassList = deleteButtonNode.parentNode.classList;
+      if (parentClassList.contains("delete")) {
       var newState = todoFunctions.deleteTodo(state, todo.id);
       update(newState);
-      // } else {
-      //   deleteButtonNode.parentNode.classList.add("delete");
-      //   // console.log(deleteButtonNode.parentNode.classList);
-      //   window.setTimeout(function() {
-      //     // console.log("callback called");
-      //     deleteButtonNode.parentNode.classList.remove("delete");
-      //   }, 4000);
-      // }
+      } else {
+        todo.delete = true;
+        deleteButtonNode.parentNode.classList.add("delete");
+        window.setTimeout(function() {
+          todo.delete = false;
+          deleteButtonNode.parentNode.classList.remove("delete");
+        }, 4000);
+      }
     });
 
     return todoNode;
@@ -119,8 +120,7 @@
       event.preventDefault();
       var description = event.target[0].value;
       event.target[0].value = ""; // wipe the form value
-      // console.log(description);
-      var newState = todoFunctions.addTodo(state, description); // ?? change this!
+      var newState = todoFunctions.addTodo(state, description);
       update(newState);
       window.scrollTo(0, 0);
     });
@@ -136,7 +136,15 @@
     var todoListNode = document.createElement("ul");
 
     state.forEach(function(todo) {
-      todoListNode.appendChild(createTodoNode(todo));
+      let newTodo = createTodoNode(todo);
+      if (todo.delete) {
+        newTodo.classList.add("delete");
+        window.setTimeout(function() {
+          todo.delete = false;
+          newTodo.classList.remove("delete");
+        }, 4000);
+      }
+      todoListNode.appendChild(newTodo);
     });
 
     // you may want to add a class for css
